@@ -1,4 +1,4 @@
-# Authorship Prediction 
+# Authorship Prediction
 
 This project is our entry for the authorship prediction competition that functions as the group assignment for the Machine Learning (Fall) course given at Tilburg University. In this challenge, the task is to predict the lead (first) author of scientific papers, based on their metadata.
 
