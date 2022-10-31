@@ -41,27 +41,27 @@ TODO
 Open terminal (mac) or cmd (windows) in the folder that you want to store the project in and do the following:
 
 1. Clone this repository
-```properties
+```console
 git clone https://github.com/wvanelteren/authorship-prediction.git
 ```
 
 2. Install pip-tools
-```properties
+```console
 pip install pip-tools
 ```
 
 3. Compile requirements.txt
-```properties
+```console
 pip-compile
 ```
 
 4. Install all required packages
-```properties
+```console
 pip-sync
 ```
 
 5. Setup pre-commit (pre-commit is used as formatter to keep the code in the same "style")
-```properties
+```console
 pre-commit install
 pre-commit run --all-files
 ```
@@ -76,7 +76,7 @@ Do this every time you change or add something significant
 git add .
 ```
 
-2. Commit files to local repository, include a message between the double quotes ("") what you've changed or added
+2. Commit files to local repository, include a short message between the double quotes ("") what you've changed or added
 
 ```console
 git commit -m "message here"
