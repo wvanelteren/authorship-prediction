@@ -9,8 +9,9 @@ repos:
     rev: 22.10.0
     hooks:
     - id: black
+      name: auto-format code (black)
 -   repo: https://github.com/pycqa/isort
     rev: 5.10.1
     hooks:
       - id: isort
-        name: auto_sort import
+        name: auto-sort imports (isort)
