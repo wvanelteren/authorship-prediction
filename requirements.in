@@ -1,7 +1,5 @@
 # requirements.in
 pandas
-
-# dev-dependencies
 pre-commit
 black
 isort

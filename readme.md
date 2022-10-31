@@ -35,3 +35,57 @@ def evaluate(gold_path, pred_path):
 ## Methods
 
 TODO
+
+## Setup
+
+Open terminal (mac) or cmd (windows) in the folder that you want to store the project in and do the following:
+
+1. Clone this repository
+```properties
+git clone https://github.com/wvanelteren/authorship-prediction.git
+```
+
+2. Install pip-tools
+```properties
+pip install pip-tools
+```
+
+3. Compile requirements.txt
+```properties
+pip-compile
+```
+
+4. Install all required packages
+```properties
+pip-sync
+```
+
+5. Setup pre-commit (pre-commit is used as formatter to keep the code in the same "style")
+```properties
+pre-commit install
+pre-commit run --all-files
+```
+
+## Git-workflow
+
+Do this every time you change or add something significant
+
+1. Add all files to git
+
+```console
+git add .
+```
+
+2. Commit files to local repository, include a message between the double quotes ("") what you've changed or added
+
+```console
+git commit -m "message here"
+```
+
+<p> Only do this if you want to update the github repo with your changes:</p>
+
+3. push the changes in your local repository to the github repo:
+
+```console
+git push origin main
+```
