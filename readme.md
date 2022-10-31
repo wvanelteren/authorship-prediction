@@ -66,14 +66,26 @@ pre-commit install
 pre-commit run --all-files
 ```
 
+6. Create your own branche to work in and make changes to code (working in your own branche ensures you do not interfere with code changes from others in the group).
+```console
+git checkout -b your_name
+## change your_name in your own name, or something else that  specifies that this is your branche
+```
+
 ## Git-workflow
 
 Do this every time you change or add something significant
 
-1. Add all files to git
+0. make sure you are in your own branche
+```console
+git checkout your_name
+```
+
+1. Add all files to git and see what files are modified
 
 ```console
 git add .
+git status
 ```
 
 2. Commit files to local repository, include a short message between the double quotes ("") what you've changed or added
@@ -82,10 +94,12 @@ git add .
 git commit -m "message here"
 ```
 
-<p> Only do this if you want to update the github repo with your changes:</p>
-
 3. push the changes in your local repository to the github repo:
 
 ```console
-git push origin main
+git push origin your_name
 ```
+
+<p> Only do this if you want to update the main github repo with your changes you made in your branche:</p>
+
+4. Create a pull request on github.com
