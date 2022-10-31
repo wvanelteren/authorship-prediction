@@ -5,8 +5,8 @@ This project is our entry for the authorship prediction competition that functio
 ## Dataset
 
 The dataset contains two files:
-* [train.json](./train.json): the metadata including the lead author of all the papers in the training data.
-* [test.json](./test.json): the metadata, excluding the lead author, of the papers in the test data.
+* [train.json](./data/train.json): the metadata including the lead author of all the papers in the training data.
+* [test.json](./data/test.json): the metadata, excluding the lead author, of the papers in the test data.
 
 Both of these files are in the JSON format. The training records specify the lead author (i.e. the first author on the author list) under the key authorID. For the test data this information is missing, as we have to predict it. The other keys have descriptive names indicating the nature of the information: e.g. title, abstract, paperId, venue (where the paper was published), year (date of publication).
 
