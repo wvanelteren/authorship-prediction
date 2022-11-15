@@ -3,3 +3,12 @@ pandas
 pre-commit
 black
 isort
+matplotlib.pyplot
+string
+nltk
+nltk.corpus
+scipy.stats
+sns
+sklearn
+dython.nominal
+json
