@@ -1,6 +1,6 @@
 import pandas as pd
 
-COL_NAMES_TO_DROP: list[str] = ["authorId"]
+COL_NAMES_TO_DROP: list[str] = ["authorName"]
 
 
 def make_dataset(path: str) -> pd.DataFrame:
