@@ -6,7 +6,64 @@ import pandas as pd
 from nltk.corpus import stopwords
 
 nltk.download("stopwords")
-eng_stopwords = set(stopwords.words("english"))
+stopwords = set(stopwords.words("english"))
+
+
+def make_features(df: pd.DataFrame) -> pd.DataFrame:
+    # df = _create_cleaned_abstract(df=df)
+    # df = _create_lemmed_abstract(df=df)
+    # df = _create_cleaned_title(df=df)
+    # df = _create_lemmed_title(df=df)
+    df = _create_numerical_features_from_abstract(df=df)
+    df = _create_features_as_text(df=df)
+    # df = _create_features_as_text_clean(df=df)
+    return df
+
+
+def _create_features_as_text(df: pd.DataFrame) -> pd.DataFrame:
+    df["featuresAsText"] = (
+        df["venue"].astype(str)
+        + " "
+        + df["abstract"]
+        + " "
+        + df["title"]
+        + " "
+        + df["num_unique_words"].astype(str)
+        + " "
+        + df["num_punctuations"].astype(str)
+        + " "
+        + df["mean_word_len"].astype(str)
+        + " "
+        + df["num_stopwords"].astype(str)
+        + " "
+        + df["num_words"].astype(str)
+    )
+    return df
+
+
+def _create_features_as_text_clean(df: pd.DataFrame) -> pd.DataFrame:
+    df["featuresAsTextClean"] = (
+        df["year"].astype(str)
+        + " "
+        + df["venue"].astype(str)
+        + " "
+        + df["abstractCleanLem"]
+        + " "
+        + df["titleCleanLem"]
+        + " "
+        + df["num_chars"].astype(str)
+        + " "
+        + df["num_unique_words"].astype(str)
+        + " "
+        + df["num_punctuations"].astype(str)
+        + " "
+        + df["mean_word_len"].astype(str)
+        + " "
+        + df["num_stopwords"].astype(str)
+        + " "
+        + df["num_words"].astype(str)
+    )
+    return df
 
 
 def _create_cleaned_abstract(df: pd.DataFrame) -> pd.DataFrame:
@@ -76,7 +133,7 @@ def _create_numerical_features_from_abstract(df: pd.DataFrame) -> pd.DataFrame:
 
         # Number of stopwords in the text
         df["num_stopwords"] = df["abstract"].apply(
-            lambda x: len([w for w in str(x).lower().split() if w in eng_stopwords])
+            lambda x: len([w for w in str(x).lower().split() if w in stopwords])
         )
 
         # Number of punctuations in the text
