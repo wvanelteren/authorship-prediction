@@ -3,23 +3,23 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 
-from models.nlp_pipelines import pipelines
+from models.nlp_pipelines import linear_svc_pipeline, pipelines
 
 
-class ModelTrainer:
+class ModelHandler:
     def __init__(
         self,
         df: pd.DataFrame,
         feature: str,
     ):
         self.X, self.y = self._load_data(df=df, feature=feature)
+        self.df = df
         self.feature = feature
 
     def _load_data(self, df: pd.DataFrame, feature: str):
         """
         Load X, y from dataframe
         """
-        df = self.remove_unique_target_variable(df=df, column=df["authorId"])
         try:
             X = df[feature]
             y = df["authorId"]
@@ -32,11 +32,19 @@ class ModelTrainer:
         test_size: float = 0.35,
         random_state: int = 150,
         shuffle=True,
-    ):
+    ) -> pd.DataFrame:
+        try:
+            df = self.remove_unique_target_variable(
+                df=self.df, column=self.df["authorId"]
+            )
+            X = df[self.feature]
+            y = df["authorId"]
+        except KeyError:
+            raise
         X_train, X_valid, y_train, y_valid = train_test_split(
-            X=self.X,
-            y=self.y,
-            stratify=self.y,
+            X=X,
+            y=y,
+            stratify=y,
             test_size=test_size,
             random_state=random_state,
             shuffle=shuffle,
@@ -44,6 +52,14 @@ class ModelTrainer:
         return self._run_pipelines(
             X_train=X_train, X_valid=X_valid, y_train=y_train, y_valid=y_valid
         )
+
+    def predict(self, test_df: pd.DataFrame):
+        X_train = self.X.to_numpy()
+        y_train = self.y
+        X_test = test_df[self.feature].to_numpy()
+        prediction_clf: Pipeline = linear_svc_pipeline()[0]
+        prediction_clf.fit(X_train, y_train)
+        return prediction_clf.predict(X_test)
 
     def _run_pipelines(self, X_train, X_valid, y_train, y_valid) -> pd.DataFrame:
         results: pd.DataFrame = pd.DataFrame()
@@ -57,9 +73,9 @@ class ModelTrainer:
             np.mean(predicted == y_valid)
             test_score: float = text_clf.score(X=X_valid, y=y_valid)
 
-            result = pd.DataFrame([
-                {"feature": self.feature, "classifier": clf_name, "score": test_score}
-            ])
+            result = pd.DataFrame(
+                [{"feature": self.feature, "classifier": clf_name, "score": test_score}]
+            )
             results = pd.concat([results, result], ignore_index=True)
         return results
 
