@@ -75,6 +75,10 @@ git checkout -b your_name
 ## change your_name in your own name, or something else that  specifies that this is your branche
 ```
 
+## Run
+
+run main.py
+
 ## Git-workflow
 
 Do this every time you change or add something significant
