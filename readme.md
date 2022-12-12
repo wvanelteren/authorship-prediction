@@ -5,8 +5,9 @@ This project is our entry for the authorship prediction competition that functio
 ## Dataset
 
 The dataset contains two files:
-* [train.json](./data/train.json): the metadata including the lead author of all the papers in the training data.
-* [test.json](./data/test.json): the metadata, excluding the lead author, of the papers in the test data.
+
+- [train.json](./data/train.json): the metadata including the lead author of all the papers in the training data.
+- [test.json](./data/test.json): the metadata, excluding the lead author, of the papers in the test data.
 
 Both of these files are in the JSON format. The training records specify the lead author (i.e. the first author on the author list) under the key authorID. For the test data this information is missing, as we have to predict it. The other keys have descriptive names indicating the nature of the information: e.g. title, abstract, paperId, venue (where the paper was published), year (date of publication).
 
@@ -32,41 +33,43 @@ def evaluate(gold_path, pred_path):
     return accuracy_score(y_true, y_pred)
 ```
 
-## Methods
-
-TODO
-
 ## Setup
 
 Open terminal (mac) or cmd (windows) in the folder that you want to store the project in and do the following:
 
 1. Clone this repository
+
 ```console
 git clone https://github.com/wvanelteren/authorship-prediction.git
 ```
 
 2. Install pip-tools
+
 ```console
 pip install pip-tools
 ```
 
 3. Compile requirements.txt
+
 ```console
 pip-compile
 ```
 
 4. Install all required packages
+
 ```console
 pip-sync
 ```
 
 5. Setup pre-commit (pre-commit is used as formatter to keep the code in the same "style")
+
 ```console
 pre-commit install
 pre-commit run --all-files
 ```
 
 6. Create your own branche to work in and make changes to code (working in your own branche ensures you do not interfere with code changes from others in the group).
+
 ```console
 git checkout -b your_name
 ## change your_name in your own name, or something else that  specifies that this is your branche
@@ -77,6 +80,7 @@ git checkout -b your_name
 Do this every time you change or add something significant
 
 0. make sure you are in your own branche
+
 ```console
 git checkout your_name
 ```

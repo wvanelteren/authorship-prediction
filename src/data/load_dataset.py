@@ -12,6 +12,9 @@ def _load_data_from_json(path: str) -> pd.DataFrame:
 
 
 def _cast_column_types(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Changes datatype "authorId" from integer to string
+    """
     if "authorId" in df.columns:
         df["authorId"] = df["authorId"].astype(str)
     return df
