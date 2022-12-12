@@ -1,11 +1,16 @@
+from sklearn.ensemble import BaggingClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
+from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
 
 
 def linear_svc_pipeline():
+    """
+    NLP pipeline with Linear SVC classifier
+    """
     clf_name = "LinearSVC"
     return (
         Pipeline(
@@ -13,7 +18,7 @@ def linear_svc_pipeline():
                 ("vect", CountVectorizer()),
                 ("tfidf", TfidfTransformer()),
                 (
-                    "svm_clf",
+                    "clf",
                     LinearSVC(
                         tol=1e-3,
                         fit_intercept=True,
@@ -30,6 +35,9 @@ def linear_svc_pipeline():
 
 
 def sgd_pipeline():
+    """
+    NLP pipeline with SGD pipeline
+    """
     clf_name = "SGD"
     return (
         Pipeline(
@@ -59,6 +67,9 @@ def sgd_pipeline():
 
 
 def xgb_pipeline():
+    """
+    NLP pipeline with XGBoost classifier
+    """
     clf_name = "XGBoost"
     return (
         Pipeline(
@@ -82,5 +93,65 @@ def xgb_pipeline():
     )
 
 
+def bagging_pipeline():
+    """
+    NLP pipeline with XGBoost classifier
+    """
+    clf_name = "Bagging"
+    return (
+        Pipeline(
+            [
+                ("vect", CountVectorizer()),
+                ("tfidf", TfidfTransformer()),
+                (
+                    "clf",
+                    BaggingClassifier(
+                        DecisionTreeClassifier(splitter="random", max_leaf_nodes=40),
+                        n_estimators=50,
+                        max_samples=1.0,
+                        bootstrap=True,
+                        n_jobs=-1,
+                    ),
+                ),
+            ]
+        ),
+        clf_name,
+    )
+
+
+def logistic_regression_pipeline():
+    """
+    NLP pipeline with Linear SVC classifier
+    """
+    clf_name = "LogisticRegression"
+    return (
+        Pipeline(
+            [
+                ("vect", CountVectorizer()),
+                ("tfidf", TfidfTransformer()),
+                (
+                    "clf",
+                    LogisticRegression(
+                        n_jobs=-1,
+                        multi_class="auto",
+                        random_state=42,
+                        penalty="l2",
+                        solver="saga",
+                        class_weight="balanced",
+                        max_iter=100,
+                        warm_start=False,
+                        fit_intercept=True,
+                    ),
+                ),
+            ]
+        ),
+        clf_name,
+    )
+
+
 def pipelines():
+    """
+    helper function that returns all NLP models and their names
+        -> Most pipelines removed to reduced comp time
+    """
     return [linear_svc_pipeline(), sgd_pipeline()]

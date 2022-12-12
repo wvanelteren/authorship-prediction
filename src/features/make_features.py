@@ -10,13 +10,13 @@ stopwords = set(stopwords.words("english"))
 
 
 def make_features(df: pd.DataFrame) -> pd.DataFrame:
-    # df = _create_cleaned_abstract(df=df)
-    # df = _create_lemmed_abstract(df=df)
-    # df = _create_cleaned_title(df=df)
-    # df = _create_lemmed_title(df=df)
+    df = _create_cleaned_abstract(df=df)
+    df = _create_lemmed_abstract(df=df)
+    df = _create_cleaned_title(df=df)
+    df = _create_lemmed_title(df=df)
     df = _create_numerical_features_from_abstract(df=df)
     df = _create_features_as_text(df=df)
-    # df = _create_features_as_text_clean(df=df)
+    df = _create_features_as_text_clean(df=df)
     return df
 
 

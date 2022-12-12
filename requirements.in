@@ -1,8 +1,11 @@
 # requirements.in
 pandas
+numpy
 matplotlib
 nltk
 seaborn
 pre-commit
 black
 isort
+sklearn
+xgboost  
